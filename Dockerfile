@@ -30,8 +30,17 @@ RUN git clone https://github.com/kcoley/gltf2usd xrutils/gltf2usd && \
 # More info @ https://github.com/google-ar/arcore-android-sdk
 RUN git clone https://github.com/google-ar/arcore-android-sdk && \
 	cd arcore-android-sdk && git checkout tags/v${ARCORE_VERSION} && cd ../ && \
-	cp -r arcore-android-sdk/tools/arcoreimg/linux xrutils/arcoreimg && \
+	mv arcore-android-sdk/tools/arcoreimg/linux xrutils/arcoreimg && \
+	chmod +x xrutils/arcoreimg/arcoreimg && \
+	chmod 777 xrutils/arcoreimg/arcoreimg && \
 	rm -rf arcore-android-sdk
+
+# Clone and setup the FBX->GLTF2 Converter
+# More info @ https://github.com/facebookincubator/FBX2glTF
+RUN curl -O https://github.com/facebookincubator/FBX2glTF/releases/download/v${FBX2GLTF_VERSION}/FBX2glTF-linux-x64 && \
+	mv FBX2glTF-linux-x64 xrutils/fbx2gltf && \
+	chmod +x xrutils/fbx2gltf && \
+	chmod 777 xrutils/fbx2gltf
 
 # Clone, setup and compile the Pixar USD Converter. This is required
 # for converting GLTF2->USDZ
