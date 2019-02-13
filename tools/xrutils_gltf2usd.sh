@@ -9,7 +9,7 @@ toFile="$2"
 
 # This will enable a fix mode to ensure all special characters etc.. are
 # cleaned from the .gltf file itself
-python ./fixgltf.py $fromFile
+python ./xrutils_fixgltf.py $fromFile
 
 # Perform the conversion and save the output to the path that was
 # provided
