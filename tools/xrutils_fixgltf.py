@@ -44,4 +44,4 @@ for material in data['materials']:
 	print excf + " -> name after -> " + material['name']
 
 with open(src_file, 'w') as outfile:
-    json.dump(data, outfile)
+	json.dump(data, outfile)
