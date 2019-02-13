@@ -31,6 +31,33 @@ sh xrutils_down.sh
 docker exec -it xrutils /bin/sh
 ```
 
+### Usage
+
+This container can be used to perform the following operations. The user will need to either exec into the container or extend it.
+
+##### Convert FBX to GLTF2 or GLB
+
+```sh
+# ensure to provide file extensions for the input and the output files
+python ./tools/fbx2gltf.py ./input/myFile.fbx ./output/myFile.gltf
+```
+
+##### Convert GLTF2 to USDZ
+
+```sh
+# ensure to provide file extensions for the input and the output files
+python ./tools/gltf2usd.py ./input/myFile.gltf ./output/myFile.usdz
+```
+
+##### Check Image Quality for Marker Tracking
+
+```sh
+# ensure to provide file extensions for the input file
+# only accepts .png, .jpeg, .jpg
+# checkimg will output a number between 0 and 100
+python ./tools/checkimg.py ./input/myFile.png
+```
+
 ### Acknowledgements
 
 This tool relies on the following open source projects.
