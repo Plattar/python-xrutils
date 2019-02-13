@@ -20,13 +20,13 @@ src_file_name, src_file_extension = os.path.splitext(src_file)
 dst_file_name, dst_file_extension = os.path.splitext(des_file)
 
 # The source file must always be .gltf
-if src_file_extension != '.gltf':
+if src_file_extension.lower() != '.gltf':
 	print "gltf2usdz.py -> source file must have an extension of .gltf but was -> " + src_file_extension
 	print "gltf2usdz.py -> cannot proceed, exit"
 	sys.exit()
 
 # The destination file must always be .usdz
-if dst_file_extension != '.usdz':
+if dst_file_extension.lower() != '.usdz':
 	print "gltf2usdz.py -> destination file must have an extension of .usdz but was -> " + dst_file_extension
 	print "gltf2usdz.py -> cannot proceed, exit"
 	sys.exit()
