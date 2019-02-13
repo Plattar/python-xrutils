@@ -5,10 +5,12 @@ import shlex
 import sys
 import os
 
+excf = sys.argv[0]
+
 # Ensure we only accept 3 command line arguments for [script, source, destination]
 if len(sys.argv) != 3:
-	print "gltf2usd.py -> script requires a source and destination files"
-	print "gltf2usd.py -> cannot proceed, exit"
+	print excf + " -> script requires a source and destination files"
+	print excf + " -> cannot proceed, exit"
 	sys.exit()
 
 src_file = sys.argv[1]
@@ -21,28 +23,28 @@ dst_file_name, dst_file_extension = os.path.splitext(des_file)
 
 # The source file must always be .gltf
 if src_file_extension.lower() != '.gltf':
-	print "gltf2usd.py -> source file must have an extension of .gltf but was -> " + src_file_extension
-	print "gltf2usd.py -> cannot proceed, exit"
+	print excf + " -> source file must have an extension of .gltf but was -> " + src_file_extension
+	print excf + " -> cannot proceed, exit"
 	sys.exit()
 
 # The destination file must always be .usdz
 if (dst_file_extension.lower() in ['.usdz','.usdc','.usda','usd']) == False:
-	print "gltf2usd.py -> destination file must have an extension of .usdz, .usdc, .usda or .usd but was -> " + dst_file_extension
-	print "gltf2usd.py -> cannot proceed, exit"
+	print excf + " -> destination file must have an extension of .usdz, .usdc, .usda or .usd but was -> " + dst_file_extension
+	print excf + " -> cannot proceed, exit"
 	sys.exit()
 
 # Check if the source file exists at path
 if os.path.isfile(src_file) != True:
-	print "gltf2usd.py -> script requires the source file to exist -> " + src_file
-	print "gltf2usd.py -> cannot proceed, exit"
+	print excf + " -> script requires the source file to exist -> " + src_file
+	print excf + " -> cannot proceed, exit"
 	sys.exit()
 
-print "gltf2usd.py -> setting source file path -> " + src_file
-print "gltf2usd.py -> setting destination file path -> " + des_file
+print excf + " -> setting source file path -> " + src_file
+print excf + " -> setting destination file path -> " + des_file
 
 xrutils_command = "sh xrutils_gltf2usd.sh " + src_file + " " + des_file
 
-print "gltf2usd.py -> executing command -> " + xrutils_command
+print excf + " -> executing command -> " + xrutils_command
 
 # call our shell script, which will in turn execute the appropriate application
 subprocess.call(shlex.split(xrutils_command))
