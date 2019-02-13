@@ -17,6 +17,12 @@ RUN apt-get update && apt-get install -y \
 	graphviz \
 	libboost-all-dev
 
+# Copy our tools into the container, these scripts will be used
+# to easily interface with the underlying xrutils tools
+COPY /tools /usr/src/app/tools
+
+# All our pre-compiled binaries and compiled binaries will be going
+# in this folder
 RUN mkdir xrutils
 
 # Clone and setup the GLTF2->USDZ Converter
