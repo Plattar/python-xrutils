@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build - < Dockerfile -t xrutils
+docker build . -t xrutils --no-cache

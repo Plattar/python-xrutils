@@ -14,8 +14,7 @@ RUN apt-get update && apt-get install -y \
 	make \
 	cmake \
 	doxygen \
-	graphviz \
-	libboost-all-dev
+	graphviz
 
 # Copy our tools into the container, these scripts will be used
 # to easily interface with the underlying xrutils tools
@@ -43,7 +42,7 @@ RUN git clone https://github.com/google-ar/arcore-android-sdk && \
 
 # Clone and setup the FBX->GLTF2 Converter
 # More info @ https://github.com/facebookincubator/FBX2glTF
-RUN curl -O https://github.com/facebookincubator/FBX2glTF/releases/download/v${FBX2GLTF_VERSION}/FBX2glTF-linux-x64 && \
+RUN wget https://github.com/facebookincubator/FBX2glTF/releases/download/v${FBX2GLTF_VERSION}/FBX2glTF-linux-x64 && \
 	mv FBX2glTF-linux-x64 xrutils/fbx2gltf && \
 	chmod +x xrutils/fbx2gltf && \
 	chmod 777 xrutils/fbx2gltf
