@@ -11,6 +11,26 @@ _Python XRUtils_ is a docker image that contains a number of pre-built tools use
 - Convert FBX models into GLTF2
 - Check image tracking quality, useful for assigning as a marker image
 
+### Quickstart
+
+Prebuilt containers are available from Plattar [dockerhub](https://hub.docker.com/r/plattar/python-xrutils) repository.
+
+##### Building/Running Locally
+
+```sh
+# to build a local version of this repository run the following script
+sh xrutils_build.sh
+
+# once built, run the following script to bring up the container
+sh xrutils_up.sh
+
+# once finished with the container, it can be bought down as follows
+sh xrutils_down.sh
+
+# once the container is running, the user can exec into it with the following command
+docker exec -it xrutils /bin/sh
+```
+
 ### Acknowledgements
 
 This tool relies on the following open source projects.
