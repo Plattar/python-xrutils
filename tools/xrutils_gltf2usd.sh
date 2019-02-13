@@ -4,6 +4,9 @@
 export PATH=$PATH:/usr/src/app/xrutils/USDPython/bin
 export PYTHONPATH=$PYTHONPATH:/usr/src/app/xrutils/USDPython/lib/python
 
+fromFile="$1"
+toFile="$2"
+
 # This will enable a fix mode to ensure all special characters etc.. are
 # cleaned from the .gltf file itself
 python ./fixgltf.py $fromFile
