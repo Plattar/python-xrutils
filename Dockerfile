@@ -54,3 +54,9 @@ RUN git clone https://github.com/PixarAnimationStudios/USD && \
 	cd USD && git checkout tags/v${USD_VERSION} && cd ../ && \
 	python USD/build_scripts/build_usd.py --build-args TBB,extra_inc=big_iron.inc --python --no-imaging --docs --no-usdview --build-monolithic xrutils/USDPython && \
 	rm -rf USD
+
+# Add our runtime python scripts to the path so they
+# are easy to find from code
+ENV CHECKIMG_PYTHON_PATH /usr/src/app/tools/checkimg.py
+ENV FBX2GLTF_PYTHON_PATH /usr/src/app/tools/fbx2gltf.py
+ENV GLTF2USD_PYTHON_PATH /usr/src/app/tools/gltf2usd.py
