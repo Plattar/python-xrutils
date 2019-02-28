@@ -37,11 +37,22 @@ with open(src_file) as f:
 
 print excf + " -> scanning and fixing GLTF material names"
 
+# Fix the names of Materials
 for material in data['materials']:
 	print excf + " -> name before -> " + material['name']
 	material['name'] = re.sub('[^A-Za-z0-9]+', '', material['name'])
 	material['name'] = material['name'].lstrip('0123456789.- ')
 	print excf + " -> name after -> " + material['name']
+
+	if 'occlusionTexture' in material:
+		material.pop('occlusionTexture', None)
+		print excf + " -> popped occusionTexture from -> " + material['name']
+
+# Remove AO textures as USDZ does not like them
+for material in data['materials']:
+	if 'occlusionTexture' in material:
+		material.pop('occlusionTexture', None)
+		print excf + " -> popped occusionTexture from -> " + material['name']
 
 with open(src_file, 'w') as outfile:
 	json.dump(data, outfile)
