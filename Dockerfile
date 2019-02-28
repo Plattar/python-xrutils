@@ -4,6 +4,8 @@ FROM python:2.7.15
 ENV USD_VERSION 18.11
 ENV ARCORE_VERSION 1.7.0
 ENV FBX2GLTF_VERSION 0.9.5
+ENV ASSIMP_VERSION a23aa7057546989742ac7af2281ee9455847272e
+ENV GLTF2USD_VERSION cea2933eabca71530576018aba0087b24311f934
 
 # Add our runtime python scripts to the path so they
 # are easy to find from code
@@ -35,6 +37,7 @@ RUN mkdir xrutils
 # Clone and setup the Assimp Converter
 # More info @ https://github.com/assimp/assimp
 RUN git clone https://github.com/assimp/assimp assimp_git && \
+	cd assimp_git && git checkout ${ASSIMP_VERSION} && cd ../ && \
 	cd assimp_git && cmake CMakeLists.txt && make -j4 && cd ../ && \
 	mkdir -p xrutils/assimp && \
 	mkdir -p xrutils/assimp && \
@@ -48,6 +51,7 @@ RUN git clone https://github.com/assimp/assimp assimp_git && \
 # Clone and setup the GLTF2->USDZ Converter
 # More info @ https://github.com/kcoley/gltf2usd
 RUN git clone https://github.com/kcoley/gltf2usd xrutils/gltf2usd && \
+	cd xrutils/gltf2usd && git checkout ${GLTF2USD_VERSION} && cd ../../ && \
 	pip install -r xrutils/gltf2usd/requirements.txt && \
 	pip install enum34 && \
 	pip install Pillow
