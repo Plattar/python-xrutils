@@ -1,7 +1,7 @@
 FROM python:2.7.15
 
 ENV USD_VERSION 18.11
-ENV ARCORE_VERSION 1.6.0
+ENV ARCORE_VERSION 1.7.0
 ENV FBX2GLTF_VERSION 0.9.5
 
 WORKDIR /usr/src/app
@@ -23,6 +23,19 @@ COPY /tools /usr/src/app/tools
 # All our pre-compiled binaries and compiled binaries will be going
 # in this folder
 RUN mkdir xrutils
+
+# Clone and setup the Assimp Converter
+# More info @ https://github.com/assimp/assimp
+RUN git clone https://github.com/assimp/assimp assimp_git && \
+	cd assimp_git && cmake CMakeLists.txt && make -j4 && cd ../ && \
+	mkdir -p xrutils/assimp && \
+	mkdir -p xrutils/assimp && \
+	mv assimp_git/lib xrutils/assimp/lib && \
+	mv assimp_git/bin xrutils/assimp/bin && \
+	chmod +x xrutils/assimp/bin/assimp && \
+	chmod 777 xrutils/assimp/bin/assimp && \
+	rm -rf assimp_git && \
+	rm -rf xrutils/assimp/bin/unit
 
 # Clone and setup the GLTF2->USDZ Converter
 # More info @ https://github.com/kcoley/gltf2usd
@@ -60,3 +73,4 @@ RUN git clone https://github.com/PixarAnimationStudios/USD && \
 ENV CHECKIMG_PYTHON_PATH /usr/src/app/tools/checkimg.py
 ENV FBX2GLTF_PYTHON_PATH /usr/src/app/tools/fbx2gltf.py
 ENV GLTF2USD_PYTHON_PATH /usr/src/app/tools/gltf2usd.py
+ENV ASSIMP_PYTHON_PATH /usr/src/app/tools/assimp.py
