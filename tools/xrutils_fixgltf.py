@@ -44,10 +44,6 @@ for material in data['materials']:
 	material['name'] = material['name'].lstrip('0123456789.- ')
 	print excf + " -> name after -> " + material['name']
 
-	if 'occlusionTexture' in material:
-		material.pop('occlusionTexture', None)
-		print excf + " -> popped occusionTexture from -> " + material['name']
-
 # Remove AO textures as USDZ does not like them
 for material in data['materials']:
 	if 'occlusionTexture' in material:
