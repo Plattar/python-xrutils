@@ -1,5 +1,8 @@
+# Create a base from a pre-compiled version of USD tools
+# More info @ https://github.com/Plattar/python-usd
 FROM plattar/python-usd:version-18.11
 
+# our binary versions where applicable
 ENV ARCORE_VERSION 1.7.0
 ENV FBX2GLTF_VERSION 0.9.5
 ENV ASSIMP_VERSION a23aa7057546989742ac7af2281ee9455847272e
