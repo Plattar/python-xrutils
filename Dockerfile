@@ -1,7 +1,5 @@
-FROM python:2.7.15
+FROM plattar/python-usd:version-18.11
 
-# our binary versions where applicable
-ENV USD_VERSION 18.11
 ENV ARCORE_VERSION 1.7.0
 ENV FBX2GLTF_VERSION 0.9.5
 ENV ASSIMP_VERSION a23aa7057546989742ac7af2281ee9455847272e
@@ -15,16 +13,6 @@ ENV GLTF2USD_PYTHON_PATH /usr/src/app/tools/gltf2usd.py
 ENV ASSIMP_PYTHON_PATH /usr/src/app/tools/assimp.py
 
 WORKDIR /usr/src/app
-
-# Required for compiling the USD source
-RUN apt-get update && apt-get install -y \
-	git \
-	g++ \
-	gcc \
-	make \
-	cmake \
-	doxygen \
-	graphviz
 
 # Copy our tools into the container, these scripts will be used
 # to easily interface with the underlying xrutils tools
@@ -71,11 +59,3 @@ RUN wget https://github.com/facebookincubator/FBX2glTF/releases/download/v${FBX2
 	mv FBX2glTF-linux-x64 xrutils/fbx2gltf && \
 	chmod +x xrutils/fbx2gltf && \
 	chmod 777 xrutils/fbx2gltf
-
-# Clone, setup and compile the Pixar USD Converter. This is required
-# for converting GLTF2->USDZ
-# More info @ https://github.com/PixarAnimationStudios/USD
-RUN git clone https://github.com/PixarAnimationStudios/USD && \
-	cd USD && git checkout tags/v${USD_VERSION} && cd ../ && \
-	python USD/build_scripts/build_usd.py --build-args TBB,extra_inc=big_iron.inc --python --no-imaging --docs --no-usdview --build-monolithic xrutils/USDPython && \
-	rm -rf USD
