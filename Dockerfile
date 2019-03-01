@@ -23,7 +23,7 @@ COPY /tools /usr/src/app/tools
 
 # All our pre-compiled binaries and compiled binaries will be going
 # in this folder
-RUN mkdir xrutils
+RUN mkdir -p xrutils
 
 # Clone and setup the Assimp Converter
 # More info @ https://github.com/assimp/assimp
