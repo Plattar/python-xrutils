@@ -31,7 +31,6 @@ RUN git clone https://github.com/assimp/assimp assimp_git && \
 	cd assimp_git && git checkout ${ASSIMP_VERSION} && cd ../ && \
 	cd assimp_git && cmake CMakeLists.txt && make -j4 && cd ../ && \
 	mkdir -p xrutils/assimp && \
-	mkdir -p xrutils/assimp && \
 	mv assimp_git/lib xrutils/assimp/lib && \
 	mv assimp_git/bin xrutils/assimp/bin && \
 	chmod +x xrutils/assimp/bin/assimp && \
