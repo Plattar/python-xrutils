@@ -9,6 +9,7 @@ ENV ARCORE_VERSION 1.12.1
 ENV FBX2GLTF_VERSION 0.9.7
 ENV ASSIMP_VERSION 2d2889f73fa1b2ca09ba9f43c9785402d3a7fdd0
 ENV GLTF2USD_VERSION 34fdd288f3b12cbf8bbe32a7ea134cd44249f3e9
+ENV USDFROMGLTF_VERSION 1cecce67c0163a1b59a07dc9d6d98682993f1294
 
 # Add our runtime python scripts to the path so they
 # are easy to find from code
@@ -63,3 +64,11 @@ RUN wget https://github.com/facebookincubator/FBX2glTF/releases/download/v${FBX2
 	mv FBX2glTF-linux-x64 xrutils/fbx2gltf && \
 	chmod +x xrutils/fbx2gltf && \
 	chmod 777 xrutils/fbx2gltf
+
+# Clone and setup GLTF->USDZ Converter from Google
+# More info @ https://github.com/google/usd_from_gltf
+RUN git clone https://github.com/google/usd_from_gltf usdz_git && \
+	cd usdz_git && git checkout ${USDFROMGLTF_VERSION} && cd ../ && \
+	apt-get install nasm && \
+	pip install Pillow && \
+	python usdz_git/tools/ufginstall/ufginstall.py google_usdz xrutils/USDPython --testdata
