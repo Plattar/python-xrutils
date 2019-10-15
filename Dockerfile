@@ -1,6 +1,6 @@
 # Create a base from a pre-compiled version of USD tools
 # More info @ https://github.com/Plattar/python-usd
-FROM plattar/python-usd:version-18.11
+FROM plattar/python-usd:version-18.11-buster
 
 LABEL MAINTAINER PLATTAR(www.plattar.com)
 
