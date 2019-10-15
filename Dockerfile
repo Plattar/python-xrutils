@@ -2,11 +2,13 @@
 # More info @ https://github.com/Plattar/python-usd
 FROM plattar/python-usd:version-18.11
 
+LABEL MAINTAINER PLATTAR(www.plattar.com)
+
 # our binary versions where applicable
-ENV ARCORE_VERSION 1.7.0
-ENV FBX2GLTF_VERSION 0.9.5
-ENV ASSIMP_VERSION a23aa7057546989742ac7af2281ee9455847272e
-ENV GLTF2USD_VERSION bfa8bfe9dc472ed0b2862a2cf55445ab2973c477
+ENV ARCORE_VERSION 1.12.1
+ENV FBX2GLTF_VERSION 0.9.7
+ENV ASSIMP_VERSION 2d2889f73fa1b2ca09ba9f43c9785402d3a7fdd0
+ENV GLTF2USD_VERSION 34fdd288f3b12cbf8bbe32a7ea134cd44249f3e9
 
 # Add our runtime python scripts to the path so they
 # are easy to find from code
