@@ -1,14 +1,14 @@
 # Create a base from a pre-compiled version of USD tools
 # More info @ https://github.com/Plattar/python-usd
-FROM plattar/python-usd:version-18.11-buster
+FROM plattar/python-usd:version-19.11-buster
 
 LABEL MAINTAINER PLATTAR(www.plattar.com)
 
 # our binary versions where applicable
-ENV ARCORE_VERSION 1.12.1
+ENV ARCORE_VERSION 1.13.0
 ENV FBX2GLTF_VERSION 0.9.7
 ENV ASSIMP_VERSION 2d2889f73fa1b2ca09ba9f43c9785402d3a7fdd0
-ENV GLTF2USD_VERSION 34fdd288f3b12cbf8bbe32a7ea134cd44249f3e9
+ENV GLTF2USD_VERSION 4646a5383d7f5c6e689a9217ae91bcf1a872f9df
 
 # Add our runtime python scripts to the path so they
 # are easy to find from code
