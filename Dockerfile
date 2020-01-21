@@ -4,11 +4,15 @@ FROM plattar/python-usd:version-19.11-buster
 
 LABEL MAINTAINER PLATTAR(www.plattar.com)
 
+# Required for compiling the USD source
+RUN apt-get update && apt-get install -y nasm
+
 # our binary versions where applicable
-ENV ARCORE_VERSION 1.13.0
+ENV ARCORE_VERSION 1.14.0
 ENV FBX2GLTF_VERSION 0.9.7
 ENV ASSIMP_VERSION 2d2889f73fa1b2ca09ba9f43c9785402d3a7fdd0
 ENV GLTF2USD_VERSION 4646a5383d7f5c6e689a9217ae91bcf1a872f9df
+ENV USDFROMGLTF_VERSION c49b1b1abce65fdc6e1bbcd11e6240138225e9f1
 
 # Add our runtime python scripts to the path so they
 # are easy to find from code
@@ -63,3 +67,10 @@ RUN wget https://github.com/facebookincubator/FBX2glTF/releases/download/v${FBX2
 	mv FBX2glTF-linux-x64 xrutils/fbx2gltf && \
 	chmod +x xrutils/fbx2gltf && \
 	chmod 777 xrutils/fbx2gltf
+
+# Clone and setup the Google usd_from_gltf converter
+# More info @ https://github.com/google/usd_from_gltf
+RUN git clone https://github.com/google/usd_from_gltf usd_from_gltf_git && \
+	cd usd_from_gltf_git && git checkout ${USDFROMGLTF_VERSION && cd ../ && \
+	pip install Pillow && \
+	python usd_from_gltf_git/tools/ufginstall/ufginstall.py xrutils/usdfgltf xrutils/USDPython

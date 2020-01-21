@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  plattar-xrutils:
+    build: .
+    container_name: plattar-xrutils
+    image: plattar/python-xrutils:latest
+    command: 
+      - /bin/sh
+      - -c
+      - |
+        tail -f /dev/null
