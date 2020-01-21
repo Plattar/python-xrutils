@@ -71,6 +71,6 @@ RUN wget https://github.com/facebookincubator/FBX2glTF/releases/download/v${FBX2
 # Clone and setup the Google usd_from_gltf converter
 # More info @ https://github.com/google/usd_from_gltf
 RUN git clone https://github.com/google/usd_from_gltf usd_from_gltf_git && \
-	cd usd_from_gltf_git && git checkout ${USDFROMGLTF_VERSION && cd ../ && \
-	pip install Pillow && \
-	python usd_from_gltf_git/tools/ufginstall/ufginstall.py xrutils/usdfgltf xrutils/USDPython
+	cd usd_from_gltf_git && git checkout ${USDFROMGLTF_VERSION} && cd ../ && \
+	mkdir usdfgltf && \
+	python usd_from_gltf_git/tools/ufginstall/ufginstall.py usdfgltf /usr/src/app/tools/xrutils/USDPython/bin
