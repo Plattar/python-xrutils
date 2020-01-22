@@ -1,18 +1,15 @@
 # Create a base from a pre-compiled version of USD tools
 # More info @ https://github.com/Plattar/python-usd
-FROM plattar/python-usd:version-19.11-buster
+FROM plattar/python-usd:dev
 
 LABEL MAINTAINER PLATTAR(www.plattar.com)
-
-# Required for compiling the USD source
-RUN apt-get update && apt-get install -y nasm
 
 # our binary versions where applicable
 ENV ARCORE_VERSION 1.14.0
 ENV FBX2GLTF_VERSION 0.9.7
 ENV ASSIMP_VERSION 2d2889f73fa1b2ca09ba9f43c9785402d3a7fdd0
 ENV GLTF2USD_VERSION 4646a5383d7f5c6e689a9217ae91bcf1a872f9df
-ENV USDFROMGLTF_VERSION c49b1b1abce65fdc6e1bbcd11e6240138225e9f1
+ENV UFG_VERSION c49b1b1abce65fdc6e1bbcd11e6240138225e9f1
 
 # Add our runtime python scripts to the path so they
 # are easy to find from code
@@ -20,6 +17,9 @@ ENV CHECKIMG_PYTHON_PATH /usr/src/app/tools/checkimg.py
 ENV FBX2GLTF_PYTHON_PATH /usr/src/app/tools/fbx2gltf.py
 ENV GLTF2USD_PYTHON_PATH /usr/src/app/tools/gltf2usd.py
 ENV ASSIMP_PYTHON_PATH /usr/src/app/tools/assimp.py
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	wget
 
 WORKDIR /usr/src/app
 
@@ -70,7 +70,7 @@ RUN wget https://github.com/facebookincubator/FBX2glTF/releases/download/v${FBX2
 
 # Clone and setup the Google usd_from_gltf converter
 # More info @ https://github.com/google/usd_from_gltf
-RUN git clone https://github.com/google/usd_from_gltf usd_from_gltf_git && \
-	cd usd_from_gltf_git && git checkout ${USDFROMGLTF_VERSION} && cd ../ && \
-	mkdir usdfgltf && \
-	python usd_from_gltf_git/tools/ufginstall/ufginstall.py usdfgltf /usr/src/app/tools/xrutils/USDPython/bin
+RUN git clone https://github.com/google/usd_from_gltf ufgsrc && \
+	cd ufgsrc && git checkout ${UFG_VERSION} && cd ../ && \
+	mkdir ufg && \
+	python ufgsrc/tools/ufginstall/ufginstall.py ufg ${USD_BUILD_PATH}
