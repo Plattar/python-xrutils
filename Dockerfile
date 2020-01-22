@@ -5,7 +5,7 @@ FROM plattar/python-usd:dev
 LABEL MAINTAINER PLATTAR(www.plattar.com)
 
 # our binary versions where applicable
-ENV ARCORE_VERSION="1.14.0"
+ENV ARCORE_VERSION="1.14.1"
 ENV FBX2GLTF_VERSION="0.9.7"
 ENV ASSIMP_VERSION="5.0.1"
 ENV GLTF2USD_VERSION="4646a5383d7f5c6e689a9217ae91bcf1a872f9df"
@@ -13,10 +13,11 @@ ENV UFG_VERSION="c49b1b1abce65fdc6e1bbcd11e6240138225e9f1"
 
 # Add our runtime python scripts to the path so they
 # are easy to find from code
-ENV CHECKIMG_PYTHON_PATH="/usr/src/app/tools/checkimg.py"
-ENV FBX2GLTF_PYTHON_PATH="/usr/src/app/tools/fbx2gltf.py"
-ENV GLTF2USD_PYTHON_PATH="/usr/src/app/tools/gltf2usd.py"
-ENV ASSIMP_PYTHON_PATH="/usr/src/app/tools/assimp.py"
+ENV TOOLS_DIR="/usr/src/app/tools"
+ENV CHECKIMG_PYTHON_PATH="${TOOLS_DIR}/checkimg.py"
+ENV FBX2GLTF_PYTHON_PATH="${TOOLS_DIR}/fbx2gltf.py"
+ENV GLTF2USD_PYTHON_PATH="${TOOLS_DIR}/gltf2usd.py"
+ENV ASSIMP_PYTHON_PATH="${TOOLS_DIR}/assimp.py"
 
 WORKDIR /usr/src/app
 
@@ -50,7 +51,7 @@ RUN git clone https://github.com/assimp/assimp "${ASSIMP_SRC}" && \
 # Clone and setup the GLTF2->USDZ Converter
 # More info @ https://github.com/kcoley/gltf2usd
 RUN git clone https://github.com/kcoley/gltf2usd xrutils/gltf2usd && \
-	cd xrutils/gltf2usd && git checkout ${GLTF2USD_VERSION} && cd ../../ && \
+	cd xrutils/gltf2usd && git checkout "${GLTF2USD_VERSION}" && cd ../../ && \
 	pip install -r xrutils/gltf2usd/requirements.txt && \
 	pip install enum34 && \
 	pip install Pillow
@@ -58,7 +59,7 @@ RUN git clone https://github.com/kcoley/gltf2usd xrutils/gltf2usd && \
 # Clone and setup the Image Marker quality checker
 # More info @ https://github.com/google-ar/arcore-android-sdk
 RUN git clone https://github.com/google-ar/arcore-android-sdk && \
-	cd arcore-android-sdk && git checkout tags/v${ARCORE_VERSION} && cd ../ && \
+	cd arcore-android-sdk && git checkout tags/v"${ARCORE_VERSION}" && cd ../ && \
 	mv arcore-android-sdk/tools/arcoreimg/linux xrutils/arcoreimg && \
 	chmod +x xrutils/arcoreimg/arcoreimg && \
 	chmod 777 xrutils/arcoreimg/arcoreimg && \
@@ -66,7 +67,7 @@ RUN git clone https://github.com/google-ar/arcore-android-sdk && \
 
 # Clone and setup the FBX->GLTF2 Converter
 # More info @ https://github.com/facebookincubator/FBX2glTF
-RUN wget https://github.com/facebookincubator/FBX2glTF/releases/download/v${FBX2GLTF_VERSION}/FBX2glTF-linux-x64 && \
+RUN wget https://github.com/facebookincubator/FBX2glTF/releases/download/v"${FBX2GLTF_VERSION}"/FBX2glTF-linux-x64 && \
 	mv FBX2glTF-linux-x64 xrutils/fbx2gltf && \
 	chmod +x xrutils/fbx2gltf && \
 	chmod 777 xrutils/fbx2gltf
@@ -74,6 +75,6 @@ RUN wget https://github.com/facebookincubator/FBX2glTF/releases/download/v${FBX2
 # Clone and setup the Google usd_from_gltf converter
 # More info @ https://github.com/google/usd_from_gltf
 RUN git clone https://github.com/google/usd_from_gltf ufgsrc && \
-	cd ufgsrc && git checkout ${UFG_VERSION} && cd ../ && \
+	cd ufgsrc && git checkout "${UFG_VERSION}" && cd ../ && \
 	mkdir ufg && \
-	python ufgsrc/tools/ufginstall/ufginstall.py ufg ${USD_BUILD_PATH}
+	python ufgsrc/tools/ufginstall/ufginstall.py ufg "${USD_BUILD_PATH}"
