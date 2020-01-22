@@ -5,21 +5,18 @@ FROM plattar/python-usd:dev
 LABEL MAINTAINER PLATTAR(www.plattar.com)
 
 # our binary versions where applicable
-ENV ARCORE_VERSION 1.14.0
-ENV FBX2GLTF_VERSION 0.9.7
-ENV ASSIMP_VERSION 2d2889f73fa1b2ca09ba9f43c9785402d3a7fdd0
-ENV GLTF2USD_VERSION 4646a5383d7f5c6e689a9217ae91bcf1a872f9df
-ENV UFG_VERSION c49b1b1abce65fdc6e1bbcd11e6240138225e9f1
+ENV ARCORE_VERSION="1.14.0"
+ENV FBX2GLTF_VERSION="0.9.7"
+ENV ASSIMP_VERSION="5.0.1"
+ENV GLTF2USD_VERSION="4646a5383d7f5c6e689a9217ae91bcf1a872f9df"
+ENV UFG_VERSION="c49b1b1abce65fdc6e1bbcd11e6240138225e9f1"
 
 # Add our runtime python scripts to the path so they
 # are easy to find from code
-ENV CHECKIMG_PYTHON_PATH /usr/src/app/tools/checkimg.py
-ENV FBX2GLTF_PYTHON_PATH /usr/src/app/tools/fbx2gltf.py
-ENV GLTF2USD_PYTHON_PATH /usr/src/app/tools/gltf2usd.py
-ENV ASSIMP_PYTHON_PATH /usr/src/app/tools/assimp.py
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-	wget
+ENV CHECKIMG_PYTHON_PATH="/usr/src/app/tools/checkimg.py"
+ENV FBX2GLTF_PYTHON_PATH="/usr/src/app/tools/fbx2gltf.py"
+ENV GLTF2USD_PYTHON_PATH="/usr/src/app/tools/gltf2usd.py"
+ENV ASSIMP_PYTHON_PATH="/usr/src/app/tools/assimp.py"
 
 WORKDIR /usr/src/app
 
@@ -33,15 +30,21 @@ RUN mkdir -p xrutils
 
 # Clone and setup the Assimp Converter
 # More info @ https://github.com/assimp/assimp
-RUN git clone https://github.com/assimp/assimp assimp_git && \
-	cd assimp_git && git checkout ${ASSIMP_VERSION} && cd ../ && \
-	cd assimp_git && cmake CMakeLists.txt && make -j4 && cd ../ && \
+ENV ASSIMP_SRC="assimpsrc"
+ENV ASSIMP_BIN_PATH="/usr/src/app/xrutils/assimp/bin"
+ENV ASSIMP_LIB_PATH="/usr/src/app/xrutils/assimp/lib"
+ENV PATH="${PATH}:${ASSIMP_BIN_PATH}"
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${ASSIMP_LIB_PATH}"
+
+RUN git clone https://github.com/assimp/assimp "${ASSIMP_SRC}" && \
+	cd "${ASSIMP_SRC}" && git checkout tags/v"${ASSIMP_VERSION}" && cd ../ && \
+	cd "${ASSIMP_SRC}" && cmake CMakeLists.txt && make -j4 && cd ../ && \
 	mkdir -p xrutils/assimp && \
-	mv assimp_git/lib xrutils/assimp/lib && \
-	mv assimp_git/bin xrutils/assimp/bin && \
+	mv "${ASSIMP_SRC}/lib" xrutils/assimp/lib && \
+	mv "${ASSIMP_SRC}/bin" xrutils/assimp/bin && \
 	chmod +x xrutils/assimp/bin/assimp && \
 	chmod 777 xrutils/assimp/bin/assimp && \
-	rm -rf assimp_git && \
+	rm -rf "${ASSIMP_SRC}" && \
 	rm -rf xrutils/assimp/bin/unit
 
 # Clone and setup the GLTF2->USDZ Converter
