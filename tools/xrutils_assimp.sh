@@ -1,7 +1,5 @@
 #!/bin/sh
 
-export LD_LIBRARY_PATH=/usr/src/app/xrutils/assimp/lib
-
 fromFile="$1"
 toFile="$2"
 

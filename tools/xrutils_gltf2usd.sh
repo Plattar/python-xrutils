@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# Export our pathing information so the USDZ converter can function
-export PATH=$PATH:/usr/src/app/xrutils/USDPython/bin
-export PYTHONPATH=$PYTHONPATH:/usr/src/app/xrutils/USDPython/lib/python
-
 fromFile="$1"
 toFile="$2"
 
