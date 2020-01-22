@@ -11,19 +11,7 @@ ENV ASSIMP_VERSION="5.0.1"
 ENV GLTF2USD_VERSION="4646a5383d7f5c6e689a9217ae91bcf1a872f9df"
 ENV UFG_VERSION="c49b1b1abce65fdc6e1bbcd11e6240138225e9f1"
 
-# Add our runtime python scripts to the path so they
-# are easy to find from code
-ENV TOOLS_DIR="/usr/src/app/tools"
-ENV CHECKIMG_PYTHON_PATH="${TOOLS_DIR}/checkimg.py"
-ENV FBX2GLTF_PYTHON_PATH="${TOOLS_DIR}/fbx2gltf.py"
-ENV GLTF2USD_PYTHON_PATH="${TOOLS_DIR}/gltf2usd.py"
-ENV ASSIMP_PYTHON_PATH="${TOOLS_DIR}/assimp.py"
-
 WORKDIR /usr/src/app
-
-# Copy our tools into the container, these scripts will be used
-# to easily interface with the underlying xrutils tools
-COPY /tools /usr/src/app/tools
 
 # ASSIMP ENV VARIABLES
 ENV ASSIMP_SRC="assimpsrc"
