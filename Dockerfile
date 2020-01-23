@@ -11,8 +11,6 @@ ENV ASSIMP_VERSION="5.0.1"
 ENV GLTF2USD_VERSION="4646a5383d7f5c6e689a9217ae91bcf1a872f9df"
 ENV UFG_VERSION="c49b1b1abce65fdc6e1bbcd11e6240138225e9f1"
 
-WORKDIR /usr/src/app
-
 # ASSIMP ENV VARIABLES
 ENV ASSIMP_SRC="assimpsrc"
 ENV ASSIMP_BIN_PATH="/usr/src/app/xrutils/assimp/bin"
@@ -26,6 +24,8 @@ ENV UFG_BIN_PATH="/usr/src/app/xrutils/ufg/bin"
 ENV UFG_LIB_PATH="/usr/src/app/xrutils/ufg/lib"
 ENV PATH="${PATH}:${UFG_BIN_PATH}"
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${UFG_LIB_PATH}"
+
+WORKDIR /usr/src/app
 
 # Required for compiling the various sources
 RUN apt-get update && apt-get install -y --no-install-recommends \
