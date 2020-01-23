@@ -25,6 +25,17 @@ ENV UFG_LIB_PATH="/usr/src/app/xrutils/ufg/lib"
 ENV PATH="${PATH}:${UFG_BIN_PATH}"
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${UFG_LIB_PATH}"
 
+# ARCOREIMG ENV VARIABLES
+ENV ARCOREIMG_BIN_PATH="/usr/src/app/xrutils/arcoreimg/bin"
+ENV PATH="${PATH}:${ARCOREIMG_BIN_PATH}"
+
+# FBX2GLTF ENV VARIABLES
+ENV FBX2GLTF_BIN_PATH="/usr/src/app/xrutils/fbx2gltf/bin"
+ENV PATH="${PATH}:${FBX2GLTF_BIN_PATH}"
+
+# GLTF2USD ENV VARIABLES
+ENV GLTF2USD_PYTHON_PATH="/usr/src/app/xrutils/gltf2usd/Source/gltf2usd.py"
+
 WORKDIR /usr/src/app
 
 # Required for compiling the various sources
@@ -60,16 +71,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	# More info @ https://github.com/google-ar/arcore-android-sdk
 	git clone https://github.com/google-ar/arcore-android-sdk && \
 	cd arcore-android-sdk && git checkout tags/v"${ARCORE_VERSION}" && cd ../ && \
-	mv arcore-android-sdk/tools/arcoreimg/linux xrutils/arcoreimg && \
-	chmod +x xrutils/arcoreimg/arcoreimg && \
-	chmod 777 xrutils/arcoreimg/arcoreimg && \
+	mv arcore-android-sdk/tools/arcoreimg/linux "${ARCOREIMG_BIN_PATH}" && \
+	chmod +x "${ARCOREIMG_BIN_PATH}"/arcoreimg && \
+	chmod 777 "${ARCOREIMG_BIN_PATH}"/arcoreimg && \
 	rm -rf arcore-android-sdk && \
 	# Clone and setup the FBX->GLTF2 Converter
 	# More info @ https://github.com/facebookincubator/FBX2glTF
 	wget https://github.com/facebookincubator/FBX2glTF/releases/download/v"${FBX2GLTF_VERSION}"/FBX2glTF-linux-x64 && \
-	mv FBX2glTF-linux-x64 xrutils/fbx2gltf && \
-	chmod +x xrutils/fbx2gltf && \
-	chmod 777 xrutils/fbx2gltf && \
+	mv FBX2glTF-linux-x64 "${FBX2GLTF_BIN_PATH}"/fbx2gltf && \
+	chmod +x "${FBX2GLTF_BIN_PATH}"/fbx2gltf && \
+	chmod 777 "${FBX2GLTF_BIN_PATH}"/fbx2gltf && \
 	# Clone and setup the Google usd_from_gltf converter
 	# More info @ https://github.com/google/usd_from_gltf
 	git clone https://github.com/google/usd_from_gltf "${UFG_SRC}" && \
