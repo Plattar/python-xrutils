@@ -4,6 +4,8 @@ FROM plattar/python-usd:version-19.11-slim-buster
 
 LABEL MAINTAINER PLATTAR(www.plattar.com)
 
+ENV BASE_DIR="/usr/src/app"
+
 # our binary versions where applicable
 ENV ARCORE_VERSION="1.14.1"
 ENV FBX2GLTF_VERSION="0.9.7"
@@ -13,31 +15,31 @@ ENV UFG_VERSION="c49b1b1abce65fdc6e1bbcd11e6240138225e9f1"
 
 # ASSIMP ENV VARIABLES
 ENV ASSIMP_SRC="assimpsrc"
-ENV ASSIMP_BIN_PATH="/usr/src/app/xrutils/assimp/bin"
-ENV ASSIMP_LIB_PATH="/usr/src/app/xrutils/assimp/lib"
+ENV ASSIMP_BIN_PATH="${BASE_DIR}/xrutils/assimp/bin"
+ENV ASSIMP_LIB_PATH="${BASE_DIR}/xrutils/assimp/lib"
 ENV PATH="${PATH}:${ASSIMP_BIN_PATH}"
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${ASSIMP_LIB_PATH}"
 
 # UFG ENV VARIABLES
 ENV UFG_SRC="ufgsrc"
-ENV UFG_BIN_PATH="/usr/src/app/xrutils/ufg/bin"
-ENV UFG_LIB_PATH="/usr/src/app/xrutils/ufg/lib"
+ENV UFG_BIN_PATH="${BASE_DIR}/xrutils/ufg/bin"
+ENV UFG_LIB_PATH="${BASE_DIR}/xrutils/ufg/lib"
 ENV PATH="${PATH}:${UFG_BIN_PATH}"
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${UFG_LIB_PATH}"
 
 # ARCOREIMG ENV VARIABLES
-ENV ARCOREIMG_BIN_PATH="/usr/src/app/xrutils/arcoreimg/bin"
+ENV ARCOREIMG_BIN_PATH="${BASE_DIR}/xrutils/arcoreimg/bin"
 ENV PATH="${PATH}:${ARCOREIMG_BIN_PATH}"
 
 # FBX2GLTF ENV VARIABLES
-ENV FBX2GLTF_BIN_PATH="/usr/src/app/xrutils/fbx2gltf/bin"
+ENV FBX2GLTF_BIN_PATH="${BASE_DIR}/xrutils/fbx2gltf/bin"
 ENV PATH="${PATH}:${FBX2GLTF_BIN_PATH}"
 
 # GLTF2USD ENV VARIABLES
-ENV GLTF2USD_BIN_PATH="/usr/src/app/xrutils/gltf2usd/Source"
+ENV GLTF2USD_BIN_PATH="${BASE_DIR}/xrutils/gltf2usd/Source"
 ENV PATH="${PATH}:${GLTF2USD_BIN_PATH}"
 
-WORKDIR /usr/src/app
+WORKDIR ${BASE_DIR}
 
 # Required for compiling the various sources
 RUN apt-get update && apt-get install -y --no-install-recommends \
