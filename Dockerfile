@@ -55,12 +55,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	cd "${ASSIMP_SRC}" && git checkout tags/v"${ASSIMP_VERSION}" && cd ../ && \
 	cd "${ASSIMP_SRC}" && cmake CMakeLists.txt && make -j4 && cd ../ && \
 	mkdir -p xrutils/assimp && \
-	mv "${ASSIMP_SRC}/lib" xrutils/assimp/lib && \
-	mv "${ASSIMP_SRC}/bin" xrutils/assimp/bin && \
-	chmod +x xrutils/assimp/bin/assimp && \
-	chmod 777 xrutils/assimp/bin/assimp && \
+	mv "${ASSIMP_SRC}/lib" "${ASSIMP_LIB_PATH}" && \
+	mv "${ASSIMP_SRC}/bin" "${ASSIMP_BIN_PATH}" && \
+	chmod +x "${ASSIMP_BIN_PATH}"/assimp && \
+	chmod 777 "${ASSIMP_BIN_PATH}"/assimp && \
 	rm -rf "${ASSIMP_SRC}" && \
-	rm -rf xrutils/assimp/bin/unit && \
+	rm -rf "${ASSIMP_BIN_PATH}"/unit && \
 	# Clone and setup the GLTF2->USDZ Converter
 	# More info @ https://github.com/kcoley/gltf2usd
 	git clone https://github.com/kcoley/gltf2usd xrutils/gltf2usd && \
@@ -90,8 +90,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	mkdir ufg && \
 	python ufgsrc/tools/ufginstall/ufginstall.py ufg "${USD_BUILD_PATH}" && \
 	mkdir -p xrutils/ufg && \
-	mv ufg/lib xrutils/ufg/lib && \
-	mv ufg/bin xrutils/ufg/bin && \
+	mv ufg/lib "${UFG_LIB_PATH}" && \
+	mv ufg/bin "${UFG_BIN_PATH}" && \
 	rm -rf "${UFG_SRC}" && \
 	rm -rf ufg && \
 	# remove packages we no longer need/require
