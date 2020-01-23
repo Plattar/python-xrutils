@@ -51,48 +51,48 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	# in this folder
 	mkdir -p xrutils && \
 	# Assimp Clone/Compile
-	git clone https://github.com/assimp/assimp "${ASSIMP_SRC}" && \
-	cd "${ASSIMP_SRC}" && git checkout tags/v"${ASSIMP_VERSION}" && cd ../ && \
-	cd "${ASSIMP_SRC}" && cmake CMakeLists.txt && make -j4 && cd ../ && \
+	git clone https://github.com/assimp/assimp ${ASSIMP_SRC} && \
+	cd ${ASSIMP_SRC} && git checkout tags/v${ASSIMP_VERSION} && cd ../ && \
+	cd ${ASSIMP_SRC} && cmake CMakeLists.txt && make -j4 && cd ../ && \
 	mkdir -p xrutils/assimp && \
-	mv "${ASSIMP_SRC}/lib" "${ASSIMP_LIB_PATH}" && \
-	mv "${ASSIMP_SRC}/bin" "${ASSIMP_BIN_PATH}" && \
-	chmod +x "${ASSIMP_BIN_PATH}"/assimp && \
-	chmod 777 "${ASSIMP_BIN_PATH}"/assimp && \
-	rm -rf "${ASSIMP_SRC}" && \
-	rm -rf "${ASSIMP_BIN_PATH}"/unit && \
+	mv ${ASSIMP_SRC}/lib ${ASSIMP_LIB_PATH} && \
+	mv ${ASSIMP_SRC}/bin ${ASSIMP_BIN_PATH} && \
+	chmod +x ${ASSIMP_BIN_PATH}/assimp && \
+	chmod 777 ${ASSIMP_BIN_PATH}/assimp && \
+	rm -rf ${ASSIMP_SRC} && \
+	rm -rf ${ASSIMP_BIN_PATH}/unit && \
 	# Clone and setup the GLTF2->USDZ Converter
 	# More info @ https://github.com/kcoley/gltf2usd
 	git clone https://github.com/kcoley/gltf2usd xrutils/gltf2usd && \
-	cd xrutils/gltf2usd && git checkout "${GLTF2USD_VERSION}" && cd ../../ && \
+	cd xrutils/gltf2usd && git checkout ${GLTF2USD_VERSION} && cd ../../ && \
 	pip install -r xrutils/gltf2usd/requirements.txt && \
 	pip install enum34 && \
 	pip install Pillow && \
-	chmod +x "${GLTF2USD_BIN_PATH}/gltf2usd.py" && \
+	chmod +x ${GLTF2USD_BIN_PATH}/gltf2usd.py && \
 	# Clone and setup the Image Marker quality checker
 	# More info @ https://github.com/google-ar/arcore-android-sdk
 	git clone https://github.com/google-ar/arcore-android-sdk && \
-	cd arcore-android-sdk && git checkout tags/v"${ARCORE_VERSION}" && cd ../ && \
-	mv arcore-android-sdk/tools/arcoreimg/linux "${ARCOREIMG_BIN_PATH}" && \
-	chmod +x "${ARCOREIMG_BIN_PATH}"/arcoreimg && \
-	chmod 777 "${ARCOREIMG_BIN_PATH}"/arcoreimg && \
+	cd arcore-android-sdk && git checkout tags/v${ARCORE_VERSION} && cd ../ && \
+	mv arcore-android-sdk/tools/arcoreimg/linux ${ARCOREIMG_BIN_PATH} && \
+	chmod +x ${ARCOREIMG_BIN_PATH}/arcoreimg && \
+	chmod 777 ${ARCOREIMG_BIN_PATH}/arcoreimg && \
 	rm -rf arcore-android-sdk && \
 	# Clone and setup the FBX->GLTF2 Converter
 	# More info @ https://github.com/facebookincubator/FBX2glTF
-	wget https://github.com/facebookincubator/FBX2glTF/releases/download/v"${FBX2GLTF_VERSION}"/FBX2glTF-linux-x64 && \
-	mv FBX2glTF-linux-x64 "${FBX2GLTF_BIN_PATH}"/fbx2gltf && \
-	chmod +x "${FBX2GLTF_BIN_PATH}"/fbx2gltf && \
-	chmod 777 "${FBX2GLTF_BIN_PATH}"/fbx2gltf && \
+	wget https://github.com/facebookincubator/FBX2glTF/releases/download/v${FBX2GLTF_VERSION}/FBX2glTF-linux-x64 && \
+	mv FBX2glTF-linux-x64 ${FBX2GLTF_BIN_PATH}/fbx2gltf && \
+	chmod +x ${FBX2GLTF_BIN_PATH}/fbx2gltf && \
+	chmod 777 ${FBX2GLTF_BIN_PATH}/fbx2gltf && \
 	# Clone and setup the Google usd_from_gltf converter
 	# More info @ https://github.com/google/usd_from_gltf
-	git clone https://github.com/google/usd_from_gltf "${UFG_SRC}" && \
-	cd "${UFG_SRC}" && git checkout "${UFG_VERSION}" && cd ../ && \
+	git clone https://github.com/google/usd_from_gltf ${UFG_SRC} && \
+	cd ${UFG_SRC} && git checkout ${UFG_VERSION} && cd ../ && \
 	mkdir ufg && \
-	python ufgsrc/tools/ufginstall/ufginstall.py ufg "${USD_BUILD_PATH}" && \
+	python ufgsrc/tools/ufginstall/ufginstall.py ufg ${USD_BUILD_PATH} && \
 	mkdir -p xrutils/ufg && \
-	mv ufg/lib "${UFG_LIB_PATH}" && \
-	mv ufg/bin "${UFG_BIN_PATH}" && \
-	rm -rf "${UFG_SRC}" && \
+	mv ufg/lib ${UFG_LIB_PATH} && \
+	mv ufg/bin ${UFG_BIN_PATH} && \
+	rm -rf ${UFG_SRC} && \
 	rm -rf ufg && \
 	# remove packages we no longer need/require
 	# this keeps the container as small as possible
