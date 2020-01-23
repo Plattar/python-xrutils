@@ -28,6 +28,7 @@ ENV PATH="${PATH}:${UFG_BIN_PATH}"
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${UFG_LIB_PATH}"
 
 # ARCOREIMG ENV VARIABLES
+ENV ARCOREIMG_SRC="arcoresrc"
 ENV ARCOREIMG_BIN_PATH="${BASE_DIR}/xrutils/arcoreimg/bin"
 ENV PATH="${PATH}:${ARCOREIMG_BIN_PATH}"
 
@@ -73,12 +74,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	chmod +x ${GLTF2USD_BIN_PATH}/gltf2usd.py && \
 	# Clone and setup the Image Marker quality checker
 	# More info @ https://github.com/google-ar/arcore-android-sdk
-	git clone https://github.com/google-ar/arcore-android-sdk && \
-	cd arcore-android-sdk && git checkout tags/v${ARCORE_VERSION} && cd ../ && \
-	mv arcore-android-sdk/tools/arcoreimg/linux ${ARCOREIMG_BIN_PATH} && \
+	git clone https://github.com/google-ar/arcore-android-sdk ${ARCOREIMG_SRC} && \
+	cd ${ARCOREIMG_SRC} && git checkout tags/v${ARCORE_VERSION} && cd ../ && \
+	mv ${ARCOREIMG_SRC}/tools/arcoreimg/linux ${ARCOREIMG_BIN_PATH} && \
 	chmod +x ${ARCOREIMG_BIN_PATH}/arcoreimg && \
 	chmod 777 ${ARCOREIMG_BIN_PATH}/arcoreimg && \
-	rm -rf arcore-android-sdk && \
+	rm -rf ${ARCOREIMG_SRC} && \
 	# Clone and setup the FBX->GLTF2 Converter
 	# More info @ https://github.com/facebookincubator/FBX2glTF
 	wget https://github.com/facebookincubator/FBX2glTF/releases/download/v${FBX2GLTF_VERSION}/FBX2glTF-linux-x64 && \
