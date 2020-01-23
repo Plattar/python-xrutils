@@ -76,13 +76,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	# More info @ https://github.com/google-ar/arcore-android-sdk
 	git clone https://github.com/google-ar/arcore-android-sdk ${ARCOREIMG_SRC} && \
 	cd ${ARCOREIMG_SRC} && git checkout tags/v${ARCORE_VERSION} && cd ../ && \
-	mv ${ARCOREIMG_SRC}/tools/arcoreimg/linux ${ARCOREIMG_BIN_PATH} && \
+	mkdir -p ${ARCOREIMG_BIN_PATH} && \
+	mv ${ARCOREIMG_SRC}/tools/arcoreimg/linux/arcoreimg ${ARCOREIMG_BIN_PATH}/arcoreimg && \
 	chmod +x ${ARCOREIMG_BIN_PATH}/arcoreimg && \
 	chmod 777 ${ARCOREIMG_BIN_PATH}/arcoreimg && \
 	rm -rf ${ARCOREIMG_SRC} && \
 	# Clone and setup the FBX->GLTF2 Converter
 	# More info @ https://github.com/facebookincubator/FBX2glTF
 	wget https://github.com/facebookincubator/FBX2glTF/releases/download/v${FBX2GLTF_VERSION}/FBX2glTF-linux-x64 && \
+	mkdir -p ${FBX2GLTF_BIN_PATH} && \
 	mv FBX2glTF-linux-x64 ${FBX2GLTF_BIN_PATH}/fbx2gltf && \
 	chmod +x ${FBX2GLTF_BIN_PATH}/fbx2gltf && \
 	chmod 777 ${FBX2GLTF_BIN_PATH}/fbx2gltf && \
