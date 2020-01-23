@@ -1,7 +1,7 @@
 [![Twitter: @plattarglobal](https://img.shields.io/badge/contact-@plattarglobal-blue.svg?style=flat)](https://twitter.com/plattarglobal)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat)](LICENSE)
 
-_Python XRUtils_ is a docker image that contains a number of pre-built tools useful for 3D/2D file conversions. Due to the amount of time it takes to build these tools, this image can serve as a useful base for other applications. Check out the Plattar [dockerhub](https://hub.docker.com/r/plattar/python-xrutils) repository for the latest pre-built images.
+_Python XRUtils_ is a docker image that contains a number of pre-built tools useful for 3D/2D file conversions. These tools typically take a long time to build from source. This image can serve as a useful base for other applications. Check out the Plattar [dockerhub](https://hub.docker.com/r/plattar/python-xrutils) repository for the latest pre-built images.
 
 ***
 
@@ -29,33 +29,6 @@ docker exec -it plattar-xrutils /bin/sh
 
 # to clean everything run the following script as follows
 sh nuke.sh
-```
-
-### Usage
-
-This container can be used to perform the following operations. The user will need to either exec into the container or extend it.
-
-##### Convert FBX to GLTF2 or GLB
-
-``` sh
-# ensure to provide file extensions for the input and the output files
-python ./tools/fbx2gltf.py ./input/myFile.fbx ./output/myFile.gltf
-```
-
-##### Convert GLTF2 to USDZ
-
-``` sh
-# ensure to provide file extensions for the input and the output files
-python ./tools/gltf2usd.py ./input/myFile.gltf ./output/myFile.usdz
-```
-
-##### Check Image Quality for Marker Tracking
-
-``` sh
-# ensure to provide file extensions for the input file
-# only accepts .png, .jpeg, .jpg
-# checkimg will output a number between 0 and 100
-python ./tools/checkimg.py ./input/myFile.png
 ```
 
 ### Acknowledgements
