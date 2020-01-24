@@ -31,6 +31,27 @@ docker exec -it plattar-xrutils /bin/sh
 sh nuke.sh
 ```
 
+### Usage
+
+Built container places all executables in the PATH environment and can be accessed as follows.
+
+``` sh
+# Use Google ARCore arcoreimg tool
+arcoreimg eval-img --input_image_path=$IMAGE_PATH
+
+# Use Assimp assimp tool
+assimp export $FROM_MODEL_FILE_PATH $TO_MODEL_FILE_PATH
+
+# Use Facebook fbx2gltf tool
+fbx2gltf --verbose --input $FROM_MODEL_FILE_PATH --output $TO_MODEL_FILE_PATH
+
+# Use Google USD from GLTF tool
+usd_from_gltf $FROM_MODEL_FILE_PATH $TO_MODEL_FILE_PATH
+
+# Use Kcoley GLTF to USD tool (python)
+python $GLTF2USD_PY_PATH -v -g $FROM_MODEL_FILE_PATH -o $TO_MODEL_FILE_PATH
+```
+
 ### Acknowledgements
 
 This tool relies on the following open source projects.
