@@ -38,6 +38,7 @@ ENV PATH="${PATH}:${FBX2GLTF_BIN_PATH}"
 
 # GLTF2USD ENV VARIABLES
 ENV GLTF2USD_BIN_PATH="${BASE_DIR}/xrutils/gltf2usd/Source"
+ENV GLTF2USD_PY_PATH="${GLTF2USD_BIN_PATH}/gltf2usd.py"
 ENV PATH="${PATH}:${GLTF2USD_BIN_PATH}"
 
 WORKDIR ${BASE_DIR}
@@ -71,7 +72,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	pip install -r xrutils/gltf2usd/requirements.txt && \
 	pip install enum34 && \
 	pip install Pillow && \
-	chmod +x ${GLTF2USD_BIN_PATH}/gltf2usd.py && \
+	chmod +x ${GLTF2USD_PY_PATH} && \
 	# Clone and setup the Image Marker quality checker
 	# More info @ https://github.com/google-ar/arcore-android-sdk
 	git clone https://github.com/google-ar/arcore-android-sdk ${ARCOREIMG_SRC} && \
