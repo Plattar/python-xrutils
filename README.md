@@ -61,4 +61,4 @@ This tool relies on the following open source projects.
 * [kcoley GLTF to USD Python Project](https://github.com/kcoley/gltf2usd)
 * [Google ARCore SDK](https://github.com/google-ar/arcore-android-sdk)
 * [Google USD From GLTF Project](https://github.com/google/usd_from_gltf)
-
+* [Assimp Project](https://github.com/assimp/assimp)
