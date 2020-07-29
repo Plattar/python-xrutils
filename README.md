@@ -10,6 +10,7 @@ _Python XRUtils_ is a docker image that contains a number of pre-built tools use
 * Convert GLTF2 models into USDZ
 * Convert FBX models into GLTF2
 * Check image tracking quality, useful for assigning as a marker image
+* Convert images into BASIS format
 
 ### Quickstart
 
@@ -50,6 +51,9 @@ usd_from_gltf $FROM_MODEL_FILE_PATH $TO_MODEL_FILE_PATH
 
 # Use Kcoley GLTF to USD tool (python)
 python $GLTF2USD_PY_PATH -v -g $FROM_MODEL_FILE_PATH -o $TO_MODEL_FILE_PATH
+
+# Use Basis Universal tool
+basisu $FROM_IMAGE_FILE_PATH
 ```
 
 ### Acknowledgements
@@ -62,3 +66,4 @@ This tool relies on the following open source projects.
 * [Google ARCore SDK](https://github.com/google-ar/arcore-android-sdk)
 * [Google USD From GLTF Project](https://github.com/google/usd_from_gltf)
 * [Assimp Project](https://github.com/assimp/assimp)
+* [BinomialLLC Basis Universal Project](https://github.com/binomialLLC/basis_universal)
