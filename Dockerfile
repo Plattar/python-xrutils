@@ -12,14 +12,12 @@ ENV FBX2GLTF_VERSION="0.9.7"
 ENV ASSIMP_VERSION="5.0.1"
 ENV GLTF2USD_VERSION="4646a5383d7f5c6e689a9217ae91bcf1a872f9df"
 ENV UFG_VERSION="6d288cce8b68744494a226574ae1d7ba6a9c46eb"
-ENV BASIS_VERSION="1.12"
+ENV BASIS_VERSION="102275a96475933079c4d415f0eb201ce530308e"
 
 # BASIS UNIVERSAL ENV VARIABLES
 ENV BASIS_SRC="basissrc"
 ENV BASIS_BIN_PATH="${BASE_DIR}/xrutils/basisuniversal/bin"
-ENV BASIS_LIB_PATH="${BASE_DIR}/xrutils/basisuniversal/lib"
 ENV PATH="${PATH}:${ASSIMP_BIN_PATH}"
-ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${ASSIMP_LIB_PATH}"
 
 # ASSIMP ENV VARIABLES
 ENV ASSIMP_SRC="assimpsrc"
@@ -64,16 +62,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	# in this folder
 	mkdir -p xrutils && \
 	# Basis Universal Clone/Compile
+	# More info @ https://github.com/BinomialLLC/basis_universal
 	git clone https://github.com/BinomialLLC/basis_universal ${BASIS_SRC} && \
-	cd ${BASIS_SRC} && git checkout tags/v${BASIS_VERSION} && cd ../ && \
+	cd ${BASIS_SRC} && git checkout ${BASIS_VERSION} && cd ../ && \
 	cd ${BASIS_SRC} && cmake CMakeLists.txt && make && cd ../ && \
 	mkdir -p xrutils/basisuniversal && \
-	mv ${BASIS_SRC}/lib ${BASIS_LIB_PATH} && \
 	mv ${BASIS_SRC}/bin ${BASIS_BIN_PATH} && \
 	chmod +x ${BASIS_BIN_PATH}/basisu && \
 	chmod 777 ${BASIS_BIN_PATH}/basisu && \
 	rm -rf ${BASIS_SRC} && \
 	# Assimp Clone/Compile
+	# More info @ https://github.com/assimp/assimp
 	git clone https://github.com/assimp/assimp ${ASSIMP_SRC} && \
 	cd ${ASSIMP_SRC} && git checkout tags/v${ASSIMP_VERSION} && cd ../ && \
 	cd ${ASSIMP_SRC} && cmake CMakeLists.txt && make -j4 && cd ../ && \
