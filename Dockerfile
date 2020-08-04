@@ -91,6 +91,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	pip install enum34 && \
 	pip install Pillow && \
 	chmod +x ${GLTF2USD_PY_PATH} && \
+	rm -rf xrutils/gltf2usd/.git && \
+	rm -rf xrutils/gltf2usd/.gitignore && \
+	rm -rf xrutils/gltf2usd/README.md && \
 	# Clone and setup the Image Marker quality checker
 	# More info @ https://github.com/google-ar/arcore-android-sdk
 	git clone https://github.com/google-ar/arcore-android-sdk ${ARCOREIMG_SRC} && \
