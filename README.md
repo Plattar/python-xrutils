@@ -3,14 +3,14 @@
 
 _Python XRUtils_ is a docker image that contains a number of pre-built tools useful for 3D/2D file conversions. These tools typically take a long time to build from source. This image can serve as a useful base for other applications. Check out the Plattar [dockerhub](https://hub.docker.com/r/plattar/python-xrutils) repository for the latest pre-built images.
 
-***
+* * *
 
 ### About
 
-* Convert GLTF2 models into USDZ
-* Convert FBX models into GLTF2
-* Check image tracking quality, useful for assigning as a marker image
-* Convert images into BASIS format
+-   Convert GLTF2 models into USDZ
+-   Convert FBX models into GLTF2
+-   Check image tracking quality, useful for assigning as a marker image
+-   Convert images into BASIS format
 
 ### Quickstart
 
@@ -18,7 +18,7 @@ Prebuilt containers are available from Plattar [dockerhub](https://hub.docker.co
 
 ##### Building/Running Locally
 
-``` sh
+```sh
 # to build a local version of this repository run the following script
 docker-compose -f live.yml build
 
@@ -36,7 +36,7 @@ sh nuke.sh
 
 Built container places all executables in the PATH environment and can be accessed as follows.
 
-``` sh
+```sh
 # Use Google ARCore arcoreimg tool
 arcoreimg eval-img --input_image_path=$IMAGE_PATH
 
@@ -49,9 +49,6 @@ fbx2gltf --verbose --input $FROM_MODEL_FILE_PATH --output $TO_MODEL_FILE_PATH
 # Use Google USD from GLTF tool
 usd_from_gltf $FROM_MODEL_FILE_PATH $TO_MODEL_FILE_PATH
 
-# Use Kcoley GLTF to USD tool (python)
-python $GLTF2USD_PY_PATH -v -g $FROM_MODEL_FILE_PATH -o $TO_MODEL_FILE_PATH
-
 # Use Basis Universal tool
 basisu $FROM_IMAGE_FILE_PATH
 ```
@@ -60,10 +57,9 @@ basisu $FROM_IMAGE_FILE_PATH
 
 This tool relies on the following open source projects.
 
-* [Facebook Incubator FBX to GLTF Converter](https://github.com/facebookincubator/FBX2glTF)
-* [Pixar Animation Studio USD Toolchain](https://github.com/PixarAnimationStudios/USD)
-* [kcoley GLTF to USD Python Project](https://github.com/kcoley/gltf2usd)
-* [Google ARCore SDK](https://github.com/google-ar/arcore-android-sdk)
-* [Google USD From GLTF Project](https://github.com/google/usd_from_gltf)
-* [Assimp Project](https://github.com/assimp/assimp)
-* [BinomialLLC Basis Universal Project](https://github.com/binomialLLC/basis_universal)
+-   [Facebook Incubator FBX to GLTF Converter](https://github.com/facebookincubator/FBX2glTF)
+-   [Pixar Animation Studio USD Toolchain](https://github.com/PixarAnimationStudios/USD)
+-   [Google ARCore SDK](https://github.com/google-ar/arcore-android-sdk)
+-   [Google USD From GLTF Project](https://github.com/google/usd_from_gltf)
+-   [Assimp Project](https://github.com/assimp/assimp)
+-   [BinomialLLC Basis Universal Project](https://github.com/binomialLLC/basis_universal)
