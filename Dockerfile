@@ -1,6 +1,6 @@
 # Create a base from a pre-compiled version of USD tools
 # More info @ https://github.com/Plattar/python-usd
-FROM plattar/python-usd:version-21.05-slim-buster
+FROM plattar/python-usd:version-20.08-slim-buster
 
 LABEL MAINTAINER PLATTAR(www.plattar.com)
 
@@ -10,7 +10,7 @@ ENV BASE_DIR="/usr/src/app"
 ENV ARCORE_VERSION="1.24.0"
 ENV FBX2GLTF_VERSION="0.9.7"
 ENV ASSIMP_VERSION="5.0.1"
-ENV UFG_VERSION="6d288cce8b68744494a226574ae1d7ba6a9c46eb"
+ENV UFG_VERSION="cf6358025ab299d1fc931536778bf9c14b0ea849"
 ENV BASIS_VERSION="1.15_rel2"
 
 # BASIS UNIVERSAL ENV VARIABLES
@@ -51,7 +51,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	make \
 	nasm \
 	wget \
-	python-dev \
 	python3-dev \
 	curl && \
 	# All our pre-compiled binaries and compiled binaries will be going
@@ -97,7 +96,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	chmod 777 ${FBX2GLTF_BIN_PATH}/fbx2gltf && \
 	# Clone and setup the Google usd_from_gltf converter
 	# More info @ https://github.com/google/usd_from_gltf
-	git clone https://github.com/google/usd_from_gltf ${UFG_SRC} && \
+	git clone https://github.com/Plattar/usd_from_gltf ${UFG_SRC} && \
 	cd ${UFG_SRC} && git checkout ${UFG_VERSION} && cd ../ && \
 	mkdir ufg && \
 	python3 ufgsrc/tools/ufginstall/ufginstall.py ufg ${USD_BUILD_PATH} && \
@@ -115,7 +114,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	make \
 	nasm \
 	wget \
-	python-dev \
 	python3-dev \
 	curl && \
 	apt autoremove -y && \
