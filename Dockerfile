@@ -1,6 +1,6 @@
 # Create a base from a pre-compiled version of USD tools
 # More info @ https://github.com/Plattar/python-usd
-FROM plattar/python-usd:version-20.08-slim-buster
+FROM plattar/python-usd:version-21.02-slim-buster
 
 LABEL MAINTAINER PLATTAR(www.plattar.com)
 
@@ -10,7 +10,7 @@ ENV BASE_DIR="/usr/src/app"
 ENV ARCORE_VERSION="1.24.0"
 ENV FBX2GLTF_VERSION="0.9.7"
 ENV ASSIMP_VERSION="5.0.1"
-ENV UFG_VERSION="cf6358025ab299d1fc931536778bf9c14b0ea849"
+ENV UFG_VERSION="a74941a4b7270ddadddf2dcca0246f3b122c1be1"
 ENV BASIS_VERSION="1.15_rel2"
 
 # BASIS UNIVERSAL ENV VARIABLES
