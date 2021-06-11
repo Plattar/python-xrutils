@@ -52,6 +52,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	nasm \
 	wget \
 	python3-dev \
+	libpython3.7 \
 	curl && \
 	# All our pre-compiled binaries and compiled binaries will be going
 	# in this folder
