@@ -21,9 +21,7 @@ ENV PATH="${PATH}:${BASIS_BIN_PATH}"
 # ASSIMP ENV VARIABLES
 ENV ASSIMP_SRC="assimpsrc"
 ENV ASSIMP_BIN_PATH="${BASE_DIR}/xrutils/assimp/bin"
-ENV ASSIMP_LIB_PATH="${BASE_DIR}/xrutils/assimp/lib"
 ENV PATH="${PATH}:${ASSIMP_BIN_PATH}"
-ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${ASSIMP_LIB_PATH}"
 
 # UFG ENV VARIABLES
 ENV UFG_SRC="ufgsrc"
@@ -60,7 +58,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	# Basis Universal Clone/Compile
 	# More info @ https://github.com/BinomialLLC/basis_universal
 	git clone https://github.com/BinomialLLC/basis_universal ${BASIS_SRC} && \
-	cd ${BASIS_SRC} && git checkout tags/v${BASIS_VERSION} && cd ../ && \
+	cd ${BASIS_SRC} && git checkout tags/${BASIS_VERSION} && cd ../ && \
 	cd ${BASIS_SRC} && cmake CMakeLists.txt && make && cd ../ && \
 	mkdir -p xrutils/basisuniversal && \
 	mv ${BASIS_SRC}/bin ${BASIS_BIN_PATH} && \
@@ -73,7 +71,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	cd ${ASSIMP_SRC} && git checkout tags/v${ASSIMP_VERSION} && cd ../ && \
 	cd ${ASSIMP_SRC} && cmake CMakeLists.txt && make -j4 && cd ../ && \
 	mkdir -p xrutils/assimp && \
-	mv ${ASSIMP_SRC}/lib ${ASSIMP_LIB_PATH} && \
 	mv ${ASSIMP_SRC}/bin ${ASSIMP_BIN_PATH} && \
 	chmod +x ${ASSIMP_BIN_PATH}/assimp && \
 	chmod 777 ${ASSIMP_BIN_PATH}/assimp && \
