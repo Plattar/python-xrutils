@@ -12,6 +12,7 @@ ENV FBX2GLTF_VERSION="0.9.7"
 ENV ASSIMP_VERSION="5.2.4"
 ENV UFG_VERSION="a74941a4b7270ddadddf2dcca0246f3b122c1be1"
 ENV BASIS_VERSION="1.16.3"
+ENV KTXSOFT_VERSION="4.1.0-rc1"
 
 # BASIS UNIVERSAL ENV VARIABLES
 ENV BASIS_SRC="basissrc"
@@ -65,6 +66,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	chmod +x ${BASIS_BIN_PATH}/basisu && \
 	chmod 777 ${BASIS_BIN_PATH}/basisu && \
 	rm -rf ${BASIS_SRC} && \
+	# Cone and setup the KTX SOFTWARE Tools
+	# More info @ https://github.com/KhronosGroup/KTX-Software
+	wget https://github.com/KhronosGroup/KTX-Software/releases/download/v${KTXSOFT_VERSION}/KTX-Software-${KTXSOFT_VERSION}-Linux-x86_64.deb && \
+	dpkg -i KTX-Software-${KTXSOFT_VERSION}-Linux-x86_64.deb && \
+	rm -rf KTX-Software-${KTXSOFT_VERSION}-Linux-x86_64.deb && \
 	# Assimp Clone/Compile
 	# More info @ https://github.com/assimp/assimp
 	git clone https://github.com/assimp/assimp ${ASSIMP_SRC} && \

@@ -11,6 +11,7 @@ _Python XRUtils_ is a docker image that contains a number of pre-built tools use
 -   Convert FBX models into GLTF2
 -   Check image tracking quality, useful for assigning as a marker image
 -   Convert images into BASIS format
+-   Convert images into KTX2 format
 
 ### Quickstart
 
@@ -63,3 +64,4 @@ This tool relies on the following open source projects.
 -   [Google USD From GLTF Project](https://github.com/google/usd_from_gltf)
 -   [Assimp Project](https://github.com/assimp/assimp)
 -   [BinomialLLC Basis Universal Project](https://github.com/binomialLLC/basis_universal)
+-   [KhronosGroup KTX Software](https://github.com/KhronosGroup/KTX-Software)
