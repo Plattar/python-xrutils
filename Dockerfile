@@ -1,6 +1,6 @@
 # Create a base from a pre-compiled version of USD tools
 # More info @ https://github.com/Plattar/python-usd-ar
-FROM plattar/python-usd-ar:version-22.05b-slim-buster
+FROM plattar/python-usd-ar:version-22.05b-slim-bullseye
 
 LABEL MAINTAINER PLATTAR(www.plattar.com)
 
