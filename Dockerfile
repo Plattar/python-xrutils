@@ -7,9 +7,9 @@ LABEL MAINTAINER PLATTAR(www.plattar.com)
 ENV BASE_DIR="/usr/src/app"
 
 # ASSIMP ENV VARIABLES
+ENV ASSIMP_VERSION="5.2.4"
 ENV ASSIMP_SRC="assimpsrc"
 ENV ASSIMP_BIN_PATH="${BASE_DIR}/xrutils/assimp/bin"
-ENV ASSIMP_LIB_PATH="${BASE_DIR}/xrutils/assimp/lib"
 ENV PATH="${PATH}:${ASSIMP_BIN_PATH}"
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${ASSIMP_LIB_PATH}"
 
@@ -29,11 +29,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	mkdir -p xrutils && \
 	# Assimp Clone/Compile
 	# More info @ https://github.com/assimp/assimp
-	git clone https://github.com/assimp/assimp ${ASSIMP_SRC} && \
-	cd ${ASSIMP_SRC} && git checkout tags/v${ASSIMP_VERSION} && cd ../ && \
+	git clone --branch "v${ASSIMP_VERSION}" --depth 1 https://github.com/assimp/assimp.git ${ASSIMP_SRC} && \
 	cd ${ASSIMP_SRC} && cmake CMakeLists.txt && make -j4 && cd ../ && \
 	mkdir -p xrutils/assimp && \
-	mv ${ASSIMP_SRC}/lib ${ASSIMP_LIB_PATH} && \
 	mv ${ASSIMP_SRC}/bin ${ASSIMP_BIN_PATH} && \
 	chmod +x ${ASSIMP_BIN_PATH}/assimp && \
 	chmod 777 ${ASSIMP_BIN_PATH}/assimp && \
